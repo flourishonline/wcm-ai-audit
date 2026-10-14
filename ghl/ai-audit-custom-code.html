@@ -1,0 +1,359 @@
+<!-- ============================================================
+  Well Connected Marketing — Live AI Visibility Audit
+  Paste this whole block into a GHL "Custom JS/HTML" element.
+  1. Set API_BASE below to your Vercel project URL.
+  2. Set BOOK_URL to your booking page.
+============================================================= -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=League+Spartan:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+.wcmA{--red:#570022;--black:#1a1412;--cream:#faf6f1;--sand:#f1e8de;--pink:#ffbac9;--blue:#c6d5fb;--coral:#fb7149;--line:#e8d9cc;
+  width:100vw;position:relative;left:50%;margin-left:-50vw;background:var(--cream);color:var(--black);font-family:'IBM Plex Sans',system-ui,sans-serif;text-align:left;-webkit-font-smoothing:antialiased}
+.wcmA *{box-sizing:border-box}
+.wcmA .wrap{max-width:1000px;margin:0 auto;padding:72px 24px}
+.wcmA .eyebrow{margin:0 0 14px;font-family:'League Spartan',sans-serif;font-weight:700;font-size:14px;letter-spacing:3px;color:var(--red);text-transform:uppercase}
+.wcmA h1,.wcmA h2,.wcmA h3{font-family:'Gloock',serif;font-weight:400;color:var(--red);margin:0 0 16px;line-height:1.08}
+.wcmA h1{font-size:clamp(40px,5.4vw,66px)}
+.wcmA h2{font-size:clamp(30px,3.8vw,46px)}
+.wcmA h3{font-size:24px}
+.wcmA p{margin:0 0 14px;font-size:18px;line-height:1.65}
+.wcmA .card{background:#fff;border:1px solid var(--line);border-radius:32px;padding:44px}
+.wcmA .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.wcmA label{display:block;margin-bottom:8px;font-family:'League Spartan',sans-serif;font-weight:700;font-size:13px;letter-spacing:2px;color:var(--red);text-transform:uppercase}
+.wcmA input,.wcmA select{width:100%;min-height:52px;padding:0 16px;border-radius:14px;border:1.5px solid #c9b3a6;background:#fff;font:16px 'IBM Plex Sans',sans-serif;color:var(--black)}
+.wcmA input:focus,.wcmA select:focus,.wcmA button:focus-visible{outline:3px solid var(--coral);outline-offset:1px}
+.wcmA .btn{display:inline-flex;align-items:center;justify-content:center;min-height:58px;padding:0 36px;border:none;border-radius:999px;background:var(--red);color:var(--cream);font-family:'League Spartan',sans-serif;font-weight:700;font-size:16px;letter-spacing:3px;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background-color .2s,color .2s}
+.wcmA .btn:hover{background:var(--coral);color:var(--black)}
+.wcmA .link{background:none;border:none;padding:8px 4px;font-family:'League Spartan',sans-serif;font-weight:700;font-size:14px;letter-spacing:2px;color:var(--red);text-decoration:underline;cursor:pointer;text-transform:uppercase}
+.wcmA .muted{font-size:14px;color:#5b4d48}
+.wcmA .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.wcmA .opt{display:block;width:100%;text-align:left;min-height:60px;margin:0 0 12px;padding:14px 20px;border-radius:16px;border:2px solid var(--line);background:var(--cream);font:17px/1.4 'IBM Plex Sans',sans-serif;color:var(--black);cursor:pointer}
+.wcmA .opt:hover{border-color:var(--red)}
+.wcmA .bar{height:8px;border-radius:999px;background:var(--sand);overflow:hidden;margin:10px 0 22px}
+.wcmA .bar span{display:block;height:8px;background:var(--coral);border-radius:999px;transition:width .3s}
+.wcmA .pill{display:inline-block;padding:5px 11px;border-radius:999px;font-family:'League Spartan',sans-serif;font-weight:800;font-size:11px;letter-spacing:1px}
+.wcmA .p-strong{background:var(--blue);color:var(--black)}.wcmA .p-get{background:var(--coral);color:var(--black)}.wcmA .p-needs{background:var(--red);color:var(--cream)}
+.wcmA .q{border-top:1px solid #efe3d8;padding:20px 0}
+.wcmA .q:first-child{border-top:none}
+.wcmA .qtext{font-family:'Gloock',serif;font-size:22px;color:var(--red);margin:0 0 10px}
+.wcmA ol.prov{margin:6px 0 10px;padding-left:22px;font-size:16px;line-height:1.6}
+.wcmA ol.prov li.you{font-weight:600;color:var(--red)}
+.wcmA .src a{font-size:14px;color:var(--red);margin-right:14px;word-break:break-word}
+.wcmA .hero-score{background:var(--red);color:var(--cream);border-radius:32px;padding:44px;display:flex;flex-wrap:wrap;gap:28px 44px;align-items:center}
+.wcmA .hero-score .num{font-family:'Gloock',serif;font-size:96px;line-height:1;color:var(--pink)}
+.wcmA .hero-score h2{color:var(--cream)}
+.wcmA .hero-score p{color:#ffd6df}
+.wcmA .row{display:flex;flex-wrap:wrap;gap:8px 18px;padding:16px 0;border-top:1px solid #efe3d8}
+.wcmA .row .nm{flex:0 0 230px;font-family:'Gloock',serif;font-size:22px;color:var(--red)}
+.wcmA .row p{flex:1 1 340px;margin:0;font-size:16px;color:#3d3230}
+.wcmA .fixes{background:var(--pink);border-radius:28px;padding:32px 36px}
+.wcmA .fix{display:flex;gap:14px;align-items:flex-start;margin:0 0 12px}
+.wcmA .fix b.n{flex:0 0 32px;height:32px;border-radius:50%;background:var(--red);color:var(--cream);display:flex;align-items:center;justify-content:center;font-family:'League Spartan',sans-serif}
+.wcmA .human{background:var(--blue);border-radius:32px;padding:44px;display:flex;flex-wrap:wrap;gap:24px 44px;align-items:center}
+.wcmA .stack{display:flex;flex-direction:column;gap:24px}
+.wcmA .spinner{width:56px;height:56px;border-radius:50%;border:6px solid var(--sand);border-top-color:var(--coral);animation:wcmspin 1s linear infinite;margin-bottom:22px}
+@keyframes wcmspin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.wcmA .spinner{animation:none}}
+@media (max-width:600px){.wcmA .card,.wcmA .hero-score,.wcmA .human{padding:28px}.wcmA .row .nm{flex-basis:100%}}
+</style>
+
+<div class="wcmA">
+  <div class="wrap" style="padding-bottom:40px">
+    <p class="eyebrow">Free AI Visibility Audit</p>
+    <h1>Is AI recommending your practice, or the one down the road?</h1>
+    <p style="max-width:640px">More and more people ask ChatGPT, Gemini and Google's AI for a recommendation before they ever click on a website. This free audit asks AI about practices like yours in your area, live, then gives you an instant, personalised breakdown of what to fix first.</p>
+    <p class="muted">About 5 minutes · Instant results · Free</p>
+  </div>
+  <div style="background:#570022;color:#faf6f1">
+    <div class="wrap" style="padding-top:56px;padding-bottom:56px">
+      <p class="eyebrow" style="color:#ffbac9">Built with AI. Backed by a human.</p>
+      <h2 style="color:#faf6f1">Yes, this audit was built using AI. That's the point.</h2>
+      <p style="max-width:720px">The live search, the scoring and your personalised breakdown are all powered by AI: a small, real taste of what AI can do for your practice when it's used well and ethically. But when it comes to your strategy, you'll always talk to a human.</p>
+    </div>
+  </div>
+</div>
+<div class="wcmA" id="wcm-ai-audit">
+  <div class="wrap" id="wcmA-root" aria-live="polite"></div>
+</div>
+
+<script>
+(function () {
+  // ---------- SETTINGS ----------
+  var API_BASE = 'https://YOUR-PROJECT.vercel.app';   // ← your Vercel URL
+  var BOOK_URL = '/book';                            // ← your booking page
+  // ------------------------------
+
+  var root = document.getElementById('wcmA-root');
+  var state = { step: 'start', d: {}, ai: null, aiFailed: false, answers: {}, qi: 0 };
+
+  var AREAS = [
+    { id: 'ai', name: 'AI answers', tips: {
+      needs: "AI isn't recommending you yet. Start with the basics it relies on: fresh reviews, a clear page for each thing you treat, and consistent listings.",
+      getting: "You're showing up some of the time. A dedicated page for your top services, with FAQs written the way clients actually ask, will help AI recommend you more often.",
+      strong: "AI already knows who you are. Keep it that way with steady new reviews and up-to-date service pages." } },
+    { id: 'rev', name: 'Reviews & reputation', tips: {
+      needs: "Reviews are one of the strongest signals AI and Google use. Set up a simple, compliant way to invite happy clients to leave a Google review.",
+      getting: "Good start. Aim for a steady trickle of new reviews every month, and reply to each one.",
+      strong: "Great reputation. Keep replying to every review; it shows you're active and you care." } },
+    { id: 'gbp', name: 'Google & directories', tips: {
+      needs: "Complete your Google Business Profile (services, real photos, a booking link) and get listed on the health directories your clients use.",
+      getting: "Fill the gaps in your Google profile and directory listings. They're some of the quickest wins there are.",
+      strong: "Your Google profile and listings are in good shape. Check them every few months so they stay accurate." } },
+    { id: 'web', name: 'Your website', tips: {
+      needs: "AI needs clear pages to recommend you. Create a page for each main service and a profile for every clinician that says who they help.",
+      getting: "Strengthen the pages you have: add who each clinician helps, the conditions you treat, and FAQs.",
+      strong: "Your website gives AI and clients what they need. Keep adding to it as your services grow." } },
+    { id: 'book', name: 'Booking & consistency', tips: {
+      needs: "Make booking easy on a phone, and make sure your name, address, phone and booking link match everywhere online.",
+      getting: "Tidy up small inconsistencies and shorten your booking path. Every extra step loses people.",
+      strong: "Booking is easy and your details are consistent. Nicely done." } },
+    { id: 'content', name: 'Content, social & tracking', tips: {
+      needs: "Regular, helpful content keeps you visible on social, in search and in AI. And knowing where new clients come from tells you what's working.",
+      getting: "Build consistency: a simple monthly content rhythm, plus an easy way to track where new clients find you.",
+      strong: "You're showing up consistently and you know what's working. That's rare. Keep going." } }
+  ];
+
+  // Used only if the live AI check can't run.
+  var MANUAL_AI_QS = [
+    { area: 0, text: 'Ask ChatGPT or Gemini: "Who is the best [prof] in [suburb]?" Was your practice recommended?',
+      options: [['Yes, in the first few recommendations', 2], ['Yes, but further down the list', 1], ["No, we weren't mentioned", 0], ["I didn't check", 0]] },
+    { area: 0, text: 'Now search "best [prof] [suburb]" on Google. Did your practice appear in the AI summary or top results?',
+      options: [['Yes, near the top', 2], ['Somewhere on the first page', 1], ['No', 0], ["I didn't check", 0]] }
+  ];
+
+  var QS = [
+    { area: 1, text: 'Roughly how many Google reviews does your practice have?',
+      options: [['50 or more', 2], ['Between 10 and 49', 1], ['Fewer than 10', 0], ["I'm not sure", 0]] },
+    { area: 1, text: 'Have you had a new Google review in the last month, and do you reply to reviews?',
+      options: [['Yes, and we reply to them', 2], ["Yes, but we don't usually reply", 1], ['Not in the last month', 0]] },
+    { area: 2, text: 'Does your Google Business Profile have your services listed, real photos of your team and rooms, and a working booking link?',
+      options: [['Yes, all three', 2], ['One or two of them', 1], ["None, or I'm not sure", 0]] },
+    { area: 2, text: 'Is your practice listed on the health directories your clients use?',
+      options: [['Yes, on several', 2], ['On one or two', 1], ["No, or I'm not sure", 0]] },
+    { area: 3, text: 'Does your website have a separate page for each main service or condition you treat?',
+      options: [['Yes, each has its own page', 2], ['Some do', 1], ['No, it is mostly one services page', 0]] },
+    { area: 3, text: 'Does every clinician have a profile page that says who they help?',
+      options: [['Yes, with who they help and how to book', 2], ['Names and photos only', 1], ['No clinician profiles', 0]] },
+    { area: 4, text: 'On a phone, can a new client book an appointment in two or three taps?',
+      options: [['Yes, online booking is easy', 2], ['It takes a few steps', 1], ['They have to call or fill in a form', 0]] },
+    { area: 4, text: 'Are your practice name, address, phone and booking link exactly the same everywhere online?',
+      options: [["Yes, we've checked", 2], ['Probably', 1], ["No, or I don't know", 0]] },
+    { area: 5, text: 'How often do you share helpful content (social media, blog or email)?',
+      options: [['Weekly', 2], ['About monthly', 1], ['Rarely or never', 0]] },
+    { area: 5, text: 'Do you know where your new clients are finding you?',
+      options: [['Yes, we track it', 2], ['We have a rough idea', 1], ['Not really', 0]] }
+  ];
+
+  function questions() { return state.aiFailed ? MANUAL_AI_QS.concat(QS) : QS; }
+
+  // ---------- tiny DOM helper (always uses textContent: safe for AI output) ----------
+  function el(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    attrs = attrs || {};
+    for (var k in attrs) {
+      if (k === 'class') n.className = attrs[k];
+      else if (k === 'text') n.textContent = attrs[k];
+      else if (k.slice(0, 2) === 'on') n.addEventListener(k.slice(2), attrs[k]);
+      else n.setAttribute(k, attrs[k]);
+    }
+    (kids || []).forEach(function (c) { if (c) n.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+    return n;
+  }
+  function field(id, label, input) { return el('div', {}, [el('label', { for: id, text: label }), input]); }
+  function fill(s) { return s.replace('[prof]', state.d.profession || 'practitioner').replace('[suburb]', state.d.suburb || 'your suburb'); }
+  function render(node) { root.innerHTML = ''; root.appendChild(node); }
+  function top() { var r = document.getElementById('wcm-ai-audit'); if (r && r.scrollIntoView) r.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+
+  // ---------- STEP 1: details ----------
+  function viewStart() {
+    var prof = el('select', { id: 'wa-prof', required: 'required' }, [
+      ['physio', 'Physiotherapy practice'], ['psychologist', 'Psychology practice'], ['counsellor', 'Counselling practice'],
+      ['occupational therapist', 'Occupational therapy practice'], ['speech pathologist', 'Speech pathology practice'],
+      ['dietitian', 'Dietetics practice'], ['allied health clinic', 'Multidisciplinary clinic']
+    ].map(function (o) { return el('option', { value: o[0], text: o[1] }); }));
+    var st = el('select', { id: 'wa-state', required: 'required' }, ['QLD', 'NSW', 'VIC', 'SA', 'WA', 'TAS', 'ACT', 'NT'].map(function (s) { return el('option', { value: s, text: s }); }));
+    var form = el('form', { class: 'grid', onsubmit: function (e) {
+      e.preventDefault();
+      var f = e.target;
+      state.d = {
+        firstName: f.querySelector('#wa-first').value.trim(),
+        email: f.querySelector('#wa-email').value.trim(),
+        practiceName: f.querySelector('#wa-practice').value.trim(),
+        website: f.querySelector('#wa-site').value.trim(),
+        profession: f.querySelector('#wa-prof').value,
+        suburb: f.querySelector('#wa-suburb').value.trim(),
+        state: f.querySelector('#wa-state').value,
+        service: f.querySelector('#wa-service').value.trim(),
+        company_website: f.querySelector('#wa-hp').value
+      };
+      runAiCheck();
+    } }, [
+      field('wa-first', 'First name', el('input', { id: 'wa-first', type: 'text', autocomplete: 'given-name', required: 'required' })),
+      field('wa-email', 'Email', el('input', { id: 'wa-email', type: 'email', autocomplete: 'email', required: 'required' })),
+      field('wa-practice', 'Practice name', el('input', { id: 'wa-practice', type: 'text', autocomplete: 'organization', required: 'required' })),
+      field('wa-site', 'Website (optional)', el('input', { id: 'wa-site', type: 'url', placeholder: 'https://' })),
+      field('wa-prof', 'Practice type', prof),
+      field('wa-suburb', 'Suburb', el('input', { id: 'wa-suburb', type: 'text', placeholder: 'e.g. Kenmore', required: 'required' })),
+      field('wa-state', 'State', st),
+      field('wa-service', 'Service you most want to be found for (optional)', el('input', { id: 'wa-service', type: 'text', placeholder: 'e.g. gut health' })),
+      el('div', { class: 'hp', 'aria-hidden': 'true' }, [el('input', { id: 'wa-hp', type: 'text', tabindex: '-1', autocomplete: 'off' })]),
+      el('div', { style: 'grid-column:1/-1' }, [
+        el('button', { class: 'btn', type: 'submit', text: 'Run my live AI check' }),
+        el('p', { class: 'muted', style: 'margin-top:14px', text: "We'll ask AI (with live web search) the questions your clients ask, then guide you through 10 quick questions. You'll also get the occasional useful email from us. Unsubscribe anytime." })
+      ])
+    ]);
+    render(el('div', { class: 'card' }, [
+      el('p', { class: 'eyebrow', text: 'Your free AI Visibility Audit' }),
+      el('h2', { text: 'First, tell us about your practice.' }),
+      el('p', { text: "We'll ask AI about practices like yours in your area, live, and show you exactly what it says." }),
+      form
+    ]));
+  }
+
+  // ---------- STEP 2: live AI check ----------
+  function runAiCheck() {
+    var msgs = ['Asking AI who it recommends near ' + state.d.suburb + '…', 'Searching the web like your future clients do…', 'Reading the answers and the sources AI relied on…', 'Checking whether ' + state.d.practiceName + ' was mentioned…'];
+    var mi = 0;
+    var line = el('p', { text: msgs[0] });
+    render(el('div', { class: 'card' }, [el('div', { class: 'spinner', 'aria-hidden': 'true' }), el('h2', { text: 'Running your live AI check' }), line, el('p', { class: 'muted', text: 'This usually takes 30–60 seconds. Please keep this page open.' })]));
+    top();
+    var t = setInterval(function () { mi = (mi + 1) % msgs.length; line.textContent = msgs[mi]; }, 6000);
+
+    fetch(API_BASE.replace(/\/$/, '') + '/api/ai-check', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(state.d)
+    }).then(function (r) {
+      return r.json().then(function (j) { if (!r.ok) throw j; return j; });
+    }).then(function (data) {
+      clearInterval(t);
+      state.ai = data; state.aiFailed = !data.queries || !data.queries.length;
+      viewAi();
+    }).catch(function () {
+      clearInterval(t);
+      state.ai = null; state.aiFailed = true;
+      viewAi();
+    });
+  }
+
+  function viewAi() {
+    var kids = [el('p', { class: 'eyebrow', text: 'What AI said' })];
+    if (state.aiFailed) {
+      kids.push(el('h2', { text: "We couldn't reach the AI just now." }));
+      kids.push(el('p', { text: "No problem. We'll ask you to run two quick searches yourself as part of the audit." }));
+    } else {
+      var s = state.ai.summary;
+      kids.push(el('h2', { text: s.mentionedCount === 0 ? ('AI didn’t mention ' + state.d.practiceName + ' in any of our ' + s.total + ' questions.') : ('AI mentioned ' + state.d.practiceName + ' in ' + s.mentionedCount + ' of ' + s.total + ' questions.') }));
+      kids.push(el('p', { class: 'muted', text: 'Answers generated by AI with live web search on ' + new Date(s.checkedAt).toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' }) + '. AI answers vary by person, place and time, so treat this as a snapshot.' }));
+      var list = el('div', {});
+      state.ai.queries.forEach(function (q) {
+        var block = el('div', { class: 'q' }, [
+          el('p', { class: 'qtext', text: '“' + q.question + '”' }),
+          el('span', { class: 'pill ' + (q.mentioned ? (q.position && q.position > 3 ? 'p-get' : 'p-strong') : 'p-needs'), text: q.mentioned ? ('YOU WERE MENTIONED' + (q.position ? ' (#' + q.position + ')' : '')) : 'NOT MENTIONED' })
+        ]);
+        if (q.providers && q.providers.length) {
+          block.appendChild(el('p', { style: 'margin:14px 0 0;font-size:15px', text: 'AI recommended:' }));
+          var ol = el('ol', { class: 'prov' });
+          q.providers.slice(0, 5).forEach(function (p, i) { ol.appendChild(el('li', { class: q.mentioned && q.position === i + 1 ? 'you' : '', text: p })); });
+          block.appendChild(ol);
+        }
+        if (q.sources && q.sources.length) {
+          var src = el('p', { class: 'src', style: 'margin:0' }, [el('span', { class: 'muted', text: 'Sources AI relied on: ' })]);
+          q.sources.slice(0, 4).forEach(function (x) {
+            var label = x.title; try { label = new URL(x.url).hostname.replace(/^www\./, ''); } catch (e) {}
+            src.appendChild(el('a', { href: x.url, target: '_blank', rel: 'noopener nofollow', text: label }));
+          });
+          block.appendChild(src);
+        }
+        list.appendChild(block);
+      });
+      kids.push(list);
+    }
+    kids.push(el('div', { style: 'margin-top:22px' }, [el('button', { class: 'btn', type: 'button', onclick: function () { state.step = 'q'; state.qi = 0; viewQuestion(); top(); }, text: 'Continue the audit' })]));
+    kids.push(el('p', { class: 'muted', style: 'margin-top:12px', text: questions().length + ' quick questions to go.' }));
+    render(el('div', { class: 'card' }, kids));
+    top();
+  }
+
+  // ---------- STEP 3: questions ----------
+  function viewQuestion() {
+    var list = questions();
+    var q = list[state.qi];
+    var pct = Math.round((state.qi / list.length) * 100);
+    var opts = q.options.map(function (o, oi) {
+      return el('button', { class: 'opt', type: 'button', text: o[0], onclick: function () {
+        state.answers[state.qi] = { area: q.area, score: o[1] };
+        if (state.qi + 1 < list.length) { state.qi += 1; viewQuestion(); } else { viewResults(); top(); }
+      } });
+    });
+    render(el('div', { class: 'card' }, [
+      el('p', { class: 'eyebrow', style: 'margin-bottom:4px', text: AREAS[q.area].name }),
+      el('p', { class: 'muted', style: 'margin:0', text: 'Question ' + (state.qi + 1) + ' of ' + list.length }),
+      el('div', { class: 'bar', 'aria-hidden': 'true' }, [el('span', { style: 'width:' + pct + '%' })]),
+      el('h3', { style: 'font-size:clamp(24px,3vw,34px);line-height:1.2', text: fill(q.text) })
+    ].concat(opts).concat([
+      el('button', { class: 'link', type: 'button', text: 'Back', onclick: function () { if (state.qi > 0) { state.qi -= 1; viewQuestion(); } else { viewAi(); } } })
+    ])));
+  }
+
+  // ---------- STEP 4: results ----------
+  function viewResults() {
+    var sc = [0, 0, 0, 0, 0, 0];
+    Object.keys(state.answers).forEach(function (k) { var a = state.answers[k]; sc[a.area] += a.score; });
+    if (!state.aiFailed && state.ai) sc[0] = state.ai.summary.aiAreaScore;
+    var total = sc.reduce(function (a, b) { return a + b; }, 0);
+    var score = Math.round((total / 24) * 100);
+
+    var rated = AREAS.map(function (a, i) {
+      var lv = sc[i] >= 4 ? 'strong' : (sc[i] >= 2 ? 'getting' : 'needs');
+      return { name: a.name, level: lv, rating: lv === 'strong' ? 'STRONG' : (lv === 'getting' ? 'GETTING THERE' : 'NEEDS WORK'), tip: a.tips[lv], s: sc[i], i: i };
+    });
+    var fixes = rated.slice().sort(function (x, y) { return (x.s - y.s) || (x.i - y.i); }).slice(0, 3);
+
+    var headline, summary;
+    if (score < 45) { headline = 'AI is probably recommending someone else.'; summary = "The good news: most of what's holding you back is fixable, and some of it takes minutes. Start with the three fixes below."; }
+    else if (score < 75) { headline = "You're on the radar, but there are clear gaps."; summary = "You've got solid foundations. Closing the gaps below is often the difference between being mentioned and being recommended."; }
+    else { headline = "You're in good shape. Let's keep you there."; summary = "You're doing more than most practices. The fixes below will help you stay ahead as AI search keeps changing."; }
+
+    var breakdown = el('div', { class: 'card', style: 'padding:32px 36px' }, [el('p', { class: 'eyebrow', text: 'Your breakdown' })]);
+    rated.forEach(function (r) {
+      breakdown.appendChild(el('div', { class: 'row' }, [
+        el('div', { class: 'nm' }, [el('div', { text: r.name }), el('span', { class: 'pill ' + (r.level === 'strong' ? 'p-strong' : r.level === 'getting' ? 'p-get' : 'p-needs'), style: 'margin-top:8px', text: r.rating })]),
+        el('p', { text: r.tip })
+      ]));
+    });
+
+    var fx = el('div', { class: 'fixes' }, [el('p', { class: 'eyebrow', text: 'Where to start: your top three fixes' })]);
+    fixes.forEach(function (f, n) { fx.appendChild(el('div', { class: 'fix' }, [el('b', { class: 'n', text: String(n + 1) }), el('p', { style: 'margin:0' }, [el('strong', { text: f.name + ': ' }), f.tip])])); });
+
+    render(el('div', { class: 'stack' }, [
+      el('div', { class: 'hero-score' }, [
+        el('div', {}, [el('div', { class: 'num', text: String(score) }), el('p', { class: 'eyebrow', style: 'color:#ffd6df;margin:6px 0 0', text: 'out of 100' })]),
+        el('div', { style: 'flex:1 1 380px;min-width:0' }, [el('p', { class: 'eyebrow', style: 'color:#ffbac9', text: 'AI visibility score, ' + state.d.firstName }), el('h2', { text: headline }), el('p', { text: summary })])
+      ]),
+      breakdown,
+      fx,
+      el('div', { class: 'human' }, [
+        el('div', { style: 'flex:1 1 440px;min-width:0' }, [
+          el('p', { class: 'eyebrow', text: 'Your next step' }),
+          el('h2', { text: 'Want to talk to a human?' }),
+          el('p', { text: 'Book a free call with Ellissa to talk through your results and what working with Well Connected Marketing could look like: getting found in AI search, on Google and on social, and building real connections with the humans who matter most. Your clients, your referrers and your team.' })
+        ]),
+        el('div', {}, [el('a', { class: 'btn', href: BOOK_URL, text: 'Book a free call' })])
+      ]),
+      el('p', { class: 'muted', style: 'text-align:center', text: 'This audit was built with AI and combines a live AI search with your own answers. AI results change with location, wording and time, so treat it as a snapshot, not a ranking guarantee.' }),
+      el('div', { style: 'text-align:center' }, [el('button', { class: 'link', type: 'button', text: 'Retake the audit', onclick: function () { state = { step: 'start', d: {}, ai: null, aiFailed: false, answers: {}, qi: 0 }; viewStart(); top(); } })])
+    ]));
+
+    // Send the finished audit to GHL (via the backend).
+    try {
+      fetch(API_BASE.replace(/\/$/, '') + '/api/complete', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: state.d.email, firstName: state.d.firstName, practiceName: state.d.practiceName, score: score,
+          areas: rated.map(function (r) { return { name: r.name, rating: r.rating }; }),
+          fixes: fixes.map(function (f) { return { area: f.name, tip: f.tip }; }) })
+      });
+    } catch (e) {}
+  }
+
+  viewStart();
+})();
+</script>

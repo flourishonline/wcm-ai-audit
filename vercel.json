@@ -1,0 +1,6 @@
+{
+  "functions": {
+    "api/ai-check.js": { "maxDuration": 60 },
+    "api/complete.js": { "maxDuration": 15 }
+  }
+}

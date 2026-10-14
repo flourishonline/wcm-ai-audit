@@ -1,0 +1,10 @@
+{
+  "name": "wcm-ai-audit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Well Connected Marketing — live AI Visibility Audit backend (Vercel serverless functions)",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  }
+}
